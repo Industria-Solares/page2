@@ -1,5 +1,4 @@
 <template>
-    <p>Home</p>
     <Calculator />
 </template>
 
