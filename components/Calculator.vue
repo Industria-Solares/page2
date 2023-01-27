@@ -1,105 +1,107 @@
 <template>
-  <v-label>Verfügbare Fläche</v-label>
-  <v-row>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="availableLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
-        variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="availableWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
-        variant="outlined">
-      </v-text-field>
-    </v-col>
-  </v-row>
-  <v-label>Modul Fläche</v-label>
-  <v-row>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="moduleLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
-        variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="moduleWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
-        variant="outlined">
-      </v-text-field>
-    </v-col>
-  </v-row>
-  <v-label>Modul Leistung</v-label>
-  <v-row>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="maxModulePower" :rules="numberRules" @input="calculate" type="number"
-        label="Leistung pro Modul (Watt)" variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="maxModuleCount" type="number" label="Mögliche Modulanzahl" variant="outlined"
-        :readonly="true">
-      </v-text-field>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-col cols="4" xs="12">
-      <v-select v-model="moduleAlignment" @update:modelValue="calculate" label="Ausrichtung" :items="alignmentOptions"
-        item-title="text" item-value="value" signle-line></v-select>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="moduleAngle" :rules="angelRules" @input="calculate" type="number" label="Neigungswinkel"
-        variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="moduleEfficiency" :rules="numberRules" @input="calculate" type="number" label="Effizienz"
-        variant="outlined" :readonly="true">
-      </v-text-field>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="maxTotalPower" type="number" label="Mögliche Gesammtleistung (Watt)" variant="outlined"
-        :readonly="true">
-      </v-text-field>
-    </v-col>
-    <v-col cols="6" xs="12">
-      <v-text-field v-model="maxHarvestPerYear" type="number" label="Möglicher Ertrag (kWh/Jahr)" variant="outlined"
-        :readonly="true"></v-text-field>
-    </v-col>
-  </v-row>
-  <v-label>Strompreis</v-label>
-  <v-row>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="currentPrice" :rules="numberRules" @input="calculate" type="number"
-        label="Aktueller Preis (€/kWh)" variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="maxYieldPerYear" type="number" label="Möglicher Gewinn (€/Jahr)" variant="outlined"
-        :readonly="true">
-      </v-text-field>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="totalCost" :rules="numberRules" @input="calculate" type="number"
-        label="Gesammtkosten der Anlage (€)" variant="outlined">
-      </v-text-field>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="timeTillROI" type="number" label="Zeit bis zur Amortisation (Jahre)" variant="outlined"
-        :readonly="true">
-      </v-text-field>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="moduleLifetime" :rules="numberRules" @input="calculate" type="number"
-        label="Lebenszeit der Module (Jahre)" variant="outlined">
-      </v-text-field>
-    </v-col>
-    <v-col cols="4" xs="12">
-      <v-text-field v-model="maxTotalYield" type="number" label="Mögliche Nettogewinn (€)" variant="outlined"
-        :readonly="true">
-      </v-text-field>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-label>Verfügbare Fläche</v-label>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="availableLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
+          variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="availableWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
+          variant="outlined">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-label>Modul Fläche</v-label>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="moduleLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
+          variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="moduleWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
+          variant="outlined">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-label>Modul Leistung</v-label>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="maxModulePower" :rules="numberRules" @input="calculate" type="number"
+          label="Leistung pro Modul (Watt)" variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="maxModuleCount" type="number" label="Mögliche Modulanzahl" variant="outlined"
+          :readonly="true">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-select v-model="moduleAlignment" @update:modelValue="calculate" label="Ausrichtung" :items="alignmentOptions"
+          item-title="text" item-value="value" signle-line></v-select>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="moduleAngle" :rules="angelRules" @input="calculate" type="number" label="Neigungswinkel"
+          variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="moduleEfficiency" :rules="numberRules" @input="calculate" type="number" label="Effizienz"
+          variant="outlined" :readonly="true">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="maxTotalPower" type="number" label="Mögliche Gesammtleistung (Watt)" variant="outlined"
+          :readonly="true">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-text-field v-model="maxHarvestPerYear" type="number" label="Möglicher Ertrag (kWh/Jahr)" variant="outlined"
+          :readonly="true"></v-text-field>
+      </v-col>
+    </v-row>
+    <v-label>Strompreis</v-label>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="currentPrice" :rules="numberRules" @input="calculate" type="number"
+          label="Aktueller Preis (€/kWh)" variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="maxYieldPerYear" type="number" label="Möglicher Gewinn (€/Jahr)" variant="outlined"
+          :readonly="true">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="totalCost" :rules="numberRules" @input="calculate" type="number"
+          label="Gesammtkosten der Anlage (€)" variant="outlined">
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="timeTillROI" type="number" label="Zeit bis zur Amortisation (Jahre)" variant="outlined"
+          :readonly="true">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="moduleLifetime" :rules="numberRules" @input="calculate" type="number"
+          label="Lebenszeit der Module (Jahre)" variant="outlined">
+        </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <v-text-field v-model="maxTotalYield" type="number" label="Mögliche Nettogewinn (€)" variant="outlined"
+          :readonly="true">
+        </v-text-field>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
