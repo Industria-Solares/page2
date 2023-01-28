@@ -94,13 +94,13 @@
   <v-label>Angebot</v-label>
   <v-row v-if="offerRequested">
     <v-col cols="12" sm="4">
-      <v-text-field v-model="firstName" type="number" label="Vorname" variant="outlined" />
+      <v-text-field v-model="firstName" :rules="nameRules" type="text" label="Vorname" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="4">
-      <v-text-field v-model="lastName" type="number" label="Nachname" variant="outlined" />
+      <v-text-field v-model="lastName" :rules="nameRules" type="text" label="Nachname" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="4">
-      <v-text-field v-model="email" type="number" label="eMail" variant="outlined" />
+      <v-text-field v-model="email" :rules="emailRules" type="email" label="eMail" variant="outlined" />
     </v-col>
   </v-row>
   <v-row v-if="offerRequested">
@@ -180,10 +180,19 @@ const numberRules = [
   (v: number) => v > 0 || 'Dieses Feld muss größer als 0 sein',
 ]
 
-let angleRules = [
+const angleRules = [
   (v: number) => !!v || 'Dieses Feld ist erforderlich',
   (v: number) => v >= 0 || 'Dieses Feld muss größer oder gleich 0 sein',
   (v: number) => v <= 90 || 'Dieses Feld muss kleiner oder gleich 90 sein',
+]
+
+const nameRules = [
+  (v: string) => !!v || 'Dieses Feld ist erforderlich',
+]
+
+const emailRules = [
+  (v: string) => !!v || 'Dieses Feld ist erforderlich',
+  (v: string) => /.+@.+\..+/.test(v) || 'E-Mail muss gültig sein',
 ]
 
 async function selectModule() {
