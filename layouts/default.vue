@@ -14,7 +14,7 @@
       <v-app-bar floating>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer />
-        <v-img src="/img/logo.png" />
+        <v-img src="img/logo.png" />
         <v-spacer />
         <v-btn @click="changeTheme">
           <v-icon :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-icon>
