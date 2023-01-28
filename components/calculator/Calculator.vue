@@ -184,7 +184,7 @@ function calculate() {
 }
 </script>
 
-<style scoped>
+<style>
 input[type='number'] {
   -moz-appearance: textfield;
 }
