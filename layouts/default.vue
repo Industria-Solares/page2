@@ -17,7 +17,7 @@
         <v-img src="/page2/img/logo.png" />
         <v-spacer />
         <v-btn @click="changeTheme">
-          <v-icon :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"></v-icon>
+          <v-icon :icon="theme === 'lightTheme' ? 'mdi-weather-night' : 'mdi-weather-sunny'"></v-icon>
         </v-btn>
       </v-app-bar>
       <v-main>
@@ -31,10 +31,10 @@
 
 <script lang="ts" setup>
 const drawer = ref(true)
-const theme = ref('light')
+const theme = ref('lightTheme')
 
 function changeTheme() {
-  theme.value = theme.value === 'light' ? 'dark' : 'light'
+  theme.value = theme.value === 'lightTheme' ? 'darkTheme' : 'lightTheme'
 }
 </script>
 
