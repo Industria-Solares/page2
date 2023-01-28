@@ -105,7 +105,7 @@
   </v-row>
   <v-row v-if="offerRequested">
     <v-col cols="12" sm="4">    
-      <v-btn color="primary" @click="requestOffer">Add Contact</v-btn>
+      <v-btn color="primary" @click="requestOffer">Anfordern</v-btn>
     </v-col>
   </v-row>
   <v-row>
