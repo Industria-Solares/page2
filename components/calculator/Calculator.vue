@@ -1,4 +1,10 @@
 <template>
+  <v-row>
+    <v-col cols="12" sm="6">
+      <v-select v-model="moduleSelected" @update:modelValue="selectModule" label="Modul" :items="moduleOptions"
+        item-title="text" item-value="value" signle-line />
+    </v-col>
+  </v-row>
   <v-label>Verfügbare Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
@@ -24,11 +30,11 @@
   <v-label>Modul Leistung</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="maxModulePower" :rules="numberRules" @input="calculate" type="number"
+      <v-text-field v-model="modulePower" :rules="numberRules" @input="calculate" type="number"
         label="Leistung pro Modul (Watt)" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="maxModuleCount" type="number" label="Mögliche Modulanzahl" variant="outlined"
+      <v-text-field v-model="moduleCount" type="number" label="Mögliche Modulanzahl" variant="outlined"
         :readonly="true">
       </v-text-field>
     </v-col>
@@ -49,11 +55,11 @@
   </v-row>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="maxTotalPower" type="number" label="Mögliche Gesammtleistung (Watt)" variant="outlined"
+      <v-text-field v-model="totalPower" type="number" label="Mögliche Gesammtleistung (Watt)" variant="outlined"
         :readonly="true" />
     </v-col>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="maxHarvestPerYear" type="number" label="Möglicher Ertrag (kWh/Jahr)" variant="outlined"
+      <v-text-field v-model="harvestPerYear" type="number" label="Möglicher Ertrag (kWh/Jahr)" variant="outlined"
         :readonly="true" />
     </v-col>
   </v-row>
@@ -63,7 +69,7 @@
         label="Strompreis (€/kWh)" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="4">
-      <v-text-field v-model="maxYieldPerYear" type="number" label="Möglicher Gewinn (€/Jahr)" variant="outlined"
+      <v-text-field v-model="yieldPerYear" type="number" label="Möglicher Gewinn (€/Jahr)" variant="outlined"
         :readonly="true" />
     </v-col>
     <v-col cols="12" sm="4">
@@ -81,7 +87,7 @@
         label="Lebenszeit (Jahre)" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="4">
-      <v-text-field v-model="maxTotalYield" type="number" label="Mögliche Nettogewinn (€)" variant="outlined"
+      <v-text-field v-model="totalYield" type="number" label="Mögliche Nettogewinn (€)" variant="outlined"
         :readonly="true" />
     </v-col>
   </v-row>
@@ -90,27 +96,39 @@
 <script lang="ts" setup>
 import efficiencyMatrix from './efficiency'
 
+import { Ref } from 'vue'
 import { createClient } from '@supabase/supabase-js'
 const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
 
 
+const moduleSelected: Ref<any> | Ref<null> = ref(null)
 const availableLenght = ref(null)
 const availableWidth = ref(null)
 const moduleLenght = ref(null)
 const moduleWidth = ref(null)
-const maxModulePower = ref(null)
-const maxModuleCount = ref(0)
+const modulePower = ref(null)
+const modulePrice = ref(null)
+const moduleCount = ref(0)
 const moduleAlignment = ref(null)
 const moduleAngle = ref(null)
 const moduleEfficiency = ref(0)
-const maxTotalPower = ref(0)
-const maxHarvestPerYear = ref(0)
+const totalPower = ref(0)
+const harvestPerYear = ref(0)
 const currentPrice = ref(null)
-const maxYieldPerYear = ref(0)
-const totalCost = ref(null)
+const yieldPerYear = ref(0)
+const totalCost: Ref<number> | Ref<null> = ref(null)
 const timeTillROI = ref(0)
 const moduleLifetime = ref(null)
-const maxTotalYield = ref(0)
+const totalYield = ref(0)
+
+const moduleOptions = [
+  {text: 'Benutzerdefiniert', value: null},
+  {text: 'Lucor M120 / 365', value: {length: 175, width: 104, power: 365, price: 499.99, lifetime: 25}},
+  {text: 'Lucor M120 / 370', value: {length: 175, width: 104, power: 370, price: 499.99, lifetime: 25}},
+  {text: 'Lucor M120 / 375', value: {length: 175, width: 104, power: 375, price: 499.99, lifetime: 25}},
+  {text: 'Lucor M120 / 380', value: {length: 175, width: 104, power: 380, price: 499.99, lifetime: 25}},
+  {text: 'Lucor M120 / 385', value: {length: 175, width: 104, power: 385, price: 499.99, lifetime: 25}},
+]
 
 const alignmentOptions = [
   { text: 'Nord', value: 180 },
@@ -142,31 +160,51 @@ let angleRules = [
   (v: number) => v <= 90 || 'Dieses Feld muss kleiner oder gleich 90 sein',
 ]
 
-function calculate() {
+async function selectModule() {
+  if (moduleSelected.value) {
+    moduleLenght.value = moduleSelected.value.length
+    moduleWidth.value = moduleSelected.value.width
+    modulePower.value = moduleSelected.value.power
+    modulePrice.value = moduleSelected.value.price
+    moduleLifetime.value = moduleSelected.value.lifetime
+    calculate()
+  } else {
+    moduleLenght.value = null
+    moduleWidth.value = null
+    modulePower.value = null
+    modulePrice.value = null
+    moduleLifetime.value = null
+    calculate()
+  }
+}
+
+async function calculate() {
   const _availableLenght = availableLenght.value ? availableLenght.value : 0
   const _availableWidth = availableWidth.value ? availableWidth.value : 0
   const _moduleLenght = moduleLenght.value ? moduleLenght.value : 0
   const _moduleWidth = moduleWidth.value ? moduleWidth.value : 0
-  const _maxModulePower = maxModulePower.value ? maxModulePower.value : 0
+  const _modulePower = modulePower.value ? modulePower.value : 0
+  const _modulePrice = modulePrice.value ? modulePrice.value : 0
   const _moduleAlignment = moduleAlignment.value ? moduleAlignment.value : 0
   const _moduleAngle = moduleAngle.value ? moduleAngle.value : 0
   const _currentPrice = currentPrice.value ? currentPrice.value : 0
   const _moduleLifetime = moduleLifetime.value ? moduleLifetime.value : 0
-  const _totalCost = totalCost.value ? totalCost.value : 0
 
-  const maxModuleCountHorizontal = Math.floor(_availableLenght / _moduleLenght) * Math.floor(_availableWidth / _moduleWidth)
-  const maxModuleCountVertical = Math.floor(_availableLenght / _moduleWidth) * Math.floor(_availableWidth / _moduleLenght)
-  maxModuleCount.value = Math.max(maxModuleCountHorizontal, maxModuleCountVertical)
+  const moduleCountHorizontal = Math.floor(_availableLenght / _moduleLenght) * Math.floor(_availableWidth / _moduleWidth)
+  const moduleCountVertical = Math.floor(_availableLenght / _moduleWidth) * Math.floor(_availableWidth / _moduleLenght)
+  moduleCount.value = Math.max(moduleCountHorizontal, moduleCountVertical)
 
   const alignmentIndex = Math.floor(Math.abs(_moduleAlignment) / 5)
   const angleIndex = Math.floor(_moduleAngle / 5)
   moduleEfficiency.value = efficiencyMatrix[alignmentIndex][angleIndex]
   
-  maxTotalPower.value = Math.floor(maxModuleCount.value * _maxModulePower * (moduleEfficiency.value / 100) * 100) / 100
-  maxHarvestPerYear.value = Math.floor(maxTotalPower.value * 1650 / 1000 * 100) / 100
-  maxYieldPerYear.value = Math.floor(maxHarvestPerYear.value * _currentPrice * 100) / 100
-  timeTillROI.value = Math.floor(_totalCost / maxYieldPerYear.value * 100) / 100
-  maxTotalYield.value = Math.floor(maxYieldPerYear.value * (_moduleLifetime - timeTillROI.value) * 100) / 100
+  totalPower.value = Math.floor(moduleCount.value * _modulePower * (moduleEfficiency.value / 100) * 100) / 100
+  harvestPerYear.value = Math.floor(totalPower.value * 1650 / 1000 * 100) / 100
+  yieldPerYear.value = Math.floor(harvestPerYear.value * _currentPrice * 100) / 100
+  totalCost.value = Math.floor(moduleCount.value * _modulePrice * 100) / 100
+  const _totalCost = totalCost.value ? totalCost.value : 0
+  timeTillROI.value = Math.floor(_totalCost / yieldPerYear.value * 100) / 100
+  totalYield.value = Math.floor(yieldPerYear.value * (_moduleLifetime - timeTillROI.value) * 100) / 100
 }
 </script>
 
