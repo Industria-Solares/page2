@@ -1,7 +1,13 @@
 <template>
-  <v-app :theme="theme">
+  <v-app>
     <v-layout>
-      <v-navigation-drawer v-model="drawer">
+      <v-app-bar color="primary-darken-1">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-spacer />
+        <v-img src="/page2/img/logo.png" />
+        <v-spacer />
+      </v-app-bar>
+      <v-navigation-drawer color="primary" v-model="drawer">
         <v-list nav>
           <v-list-item>
             <NuxtLink to="/"><v-icon icon="mdi-home" /> Home</NuxtLink>
@@ -11,15 +17,6 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-app-bar floating>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-spacer />
-        <v-img src="/page2/img/logo.png" />
-        <v-spacer />
-        <v-btn @click="changeTheme">
-          <v-icon :icon="theme === 'lightTheme' ? 'mdi-weather-night' : 'mdi-weather-sunny'"></v-icon>
-        </v-btn>
-      </v-app-bar>
       <v-main>
         <v-container>
           <slot />
@@ -30,12 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-const drawer = ref(true)
-const theme = ref('lightTheme')
-
-function changeTheme() {
-  theme.value = theme.value === 'lightTheme' ? 'darkTheme' : 'lightTheme'
-}
+const drawer = ref(false)
 </script>
 
 <style>
