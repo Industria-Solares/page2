@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-  const theme = ref('dark')
+  const theme = ref('light')
 
   function changeTheme () {
     theme.value = theme.value === 'light' ? 'dark' : 'light'
