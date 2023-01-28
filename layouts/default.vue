@@ -14,7 +14,7 @@
   </v-app>
 </template>
 
-<script setup>
+<script lang="ts" setup>
   const theme = ref('light')
 
   function changeTheme () {
