@@ -44,7 +44,7 @@
         item-title="text" item-value="value" signle-line></v-select>
     </v-col>
     <v-col cols="12" sm="4">
-      <v-text-field v-model="moduleAngle" :rules="angelRules" @input="calculate" type="number" label="Neigungswinkel"
+      <v-text-field v-model="moduleAngle" :rules="angleRules" @input="calculate" type="number" label="Neigungswinkel"
         variant="outlined">
       </v-text-field>
     </v-col>
@@ -125,6 +125,7 @@ const totalCost = ref(null)
 const timeTillROI = ref(0)
 const moduleLifetime = ref(null)
 const maxTotalYield = ref(0)
+
 const alignmentOptions = [
   { text: 'Nord', value: 180 },
   { text: 'Nord-Nord-Ost', value: 160 },
@@ -143,15 +144,18 @@ const alignmentOptions = [
   { text: 'Nord-West', value: -135 },
   { text: 'Nord-Nord-West', value: -160 },
 ]
+
 const numberRules = [
   (v: number) => !!v || 'Dieses Feld ist erforderlich',
   (v: number) => v > 0 || 'Dieses Feld muss größer als 0 sein',
 ]
-let angelRules = [
+
+let angleRules = [
   (v: number) => !!v || 'Dieses Feld ist erforderlich',
   (v: number) => v >= 0 || 'Dieses Feld muss größer oder gleich 0 sein',
   (v: number) => v <= 90 || 'Dieses Feld muss kleiner oder gleich 90 sein',
 ]
+
 function calculate() {
   const _availableLenght = availableLenght.value ? availableLenght.value : 0
   const _availableWidth = availableWidth.value ? availableWidth.value : 0
@@ -167,9 +171,11 @@ function calculate() {
   const maxModuleCountHorizontal = Math.floor(_availableLenght / _moduleLenght) * Math.floor(_availableWidth / _moduleWidth)
   const maxModuleCountVertical = Math.floor(_availableLenght / _moduleWidth) * Math.floor(_availableWidth / _moduleLenght)
   maxModuleCount.value = Math.max(maxModuleCountHorizontal, maxModuleCountVertical)
+
   const alignmentIndex = Math.floor(Math.abs(_moduleAlignment) / 5)
   const angleIndex = Math.floor(_moduleAngle / 5)
   moduleEfficiency.value = efficiencyMatrix[alignmentIndex][angleIndex]
+  
   maxTotalPower.value = Math.floor(maxModuleCount.value * _maxModulePower * (moduleEfficiency.value / 100) * 100) / 100
   maxHarvestPerYear.value = Math.floor(maxTotalPower.value * 1650 / 1000 * 100) / 100
   maxYieldPerYear.value = Math.floor(maxHarvestPerYear.value * _currentPrice * 100) / 100
