@@ -6,4 +6,3 @@ dist
 .cache
 .output
 .env
-yarn.lock
