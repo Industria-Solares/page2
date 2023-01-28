@@ -91,6 +91,28 @@
         :readonly="true" />
     </v-col>
   </v-row>
+  <v-label>Angebot</v-label>
+  <v-row v-if="offerRequested">
+    <v-col cols="12" sm="4">
+      <v-text-field v-model="firstName" type="number" label="Vorname" variant="outlined" />
+    </v-col>
+    <v-col cols="12" sm="4">
+      <v-text-field v-model="lastName" type="number" label="Nachname" variant="outlined" />
+    </v-col>
+    <v-col cols="12" sm="4">
+      <v-text-field v-model="email" type="number" label="eMail" variant="outlined" />
+    </v-col>
+  </v-row>
+  <v-row v-if="offerRequested">
+    <v-col cols="12" sm="4">    
+      <v-btn color="primary" @click="requestOffer">Add Contact</v-btn>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col cols="12" sm="4">
+      <v-switch v-model="offerRequested" label="Angebot anfordern" />
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts" setup>
@@ -120,14 +142,18 @@ const totalCost: Ref<number> | Ref<null> = ref(null)
 const timeTillROI = ref(0)
 const moduleLifetime = ref(null)
 const totalYield = ref(0)
+const offerRequested = ref(false)
+const firstName = ref(null)
+const lastName = ref(null)
+const email = ref(null)
 
 const moduleOptions = [
   {text: 'Benutzerdefiniert', value: null},
-  {text: 'Lucor M120 / 365', value: {length: 175, width: 104, power: 365, price: 499.99, lifetime: 25}},
-  {text: 'Lucor M120 / 370', value: {length: 175, width: 104, power: 370, price: 499.99, lifetime: 25}},
-  {text: 'Lucor M120 / 375', value: {length: 175, width: 104, power: 375, price: 499.99, lifetime: 25}},
-  {text: 'Lucor M120 / 380', value: {length: 175, width: 104, power: 380, price: 499.99, lifetime: 25}},
-  {text: 'Lucor M120 / 385', value: {length: 175, width: 104, power: 385, price: 499.99, lifetime: 25}},
+  {text: 'Luxor M120 / 365', value: {length: 175, width: 100, power: 365, price: 400.00, lifetime: 25}},
+  {text: 'Luxor M120 / 370', value: {length: 175, width: 100, power: 370, price: 425.00, lifetime: 25}},
+  {text: 'Luxor M120 / 375', value: {length: 175, width: 100, power: 375, price: 450.00, lifetime: 25}},
+  {text: 'Luxor M120 / 380', value: {length: 175, width: 100, power: 380, price: 475.00, lifetime: 25}},
+  {text: 'Luxor M120 / 385', value: {length: 175, width: 100, power: 385, price: 500.00, lifetime: 25}},
 ]
 
 const alignmentOptions = [
@@ -201,10 +227,26 @@ async function calculate() {
   totalPower.value = Math.floor(moduleCount.value * _modulePower * (moduleEfficiency.value / 100) * 100) / 100
   harvestPerYear.value = Math.floor(totalPower.value * 1650 / 1000 * 100) / 100
   yieldPerYear.value = Math.floor(harvestPerYear.value * _currentPrice * 100) / 100
-  totalCost.value = Math.floor(moduleCount.value * _modulePrice * 100) / 100
+  if (modulePrice.value) totalCost.value = Math.floor(moduleCount.value * _modulePrice * 100) / 100
+
   const _totalCost = totalCost.value ? totalCost.value : 0
   timeTillROI.value = Math.floor(_totalCost / yieldPerYear.value * 100) / 100
   totalYield.value = Math.floor(yieldPerYear.value * (_moduleLifetime - timeTillROI.value) * 100) / 100
+}
+
+async function requestOffer() {
+  const { error } = await supabase
+    .from('contacts')
+    .insert({
+      first_name: 'Test',
+      last_name: 'Test',
+      city: 'Test',
+      zipcode: 'Test',
+      street: 'Test',
+      street_no: 'Test',
+      email: 'Test',
+      phone: 'Test',
+    })
 }
 </script>
 
