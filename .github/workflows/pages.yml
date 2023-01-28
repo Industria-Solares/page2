@@ -26,12 +26,12 @@ jobs:
           node-version: 18
 
       - name: Build Nuxt3 static site
-        run: yarn && yarn generate
+        run: yarn && yarn generate && touch .output/public/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: ./.output/public
+          build_dir: .output/public
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
