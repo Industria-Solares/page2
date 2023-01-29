@@ -93,14 +93,19 @@
   </v-row>
   <v-label>Angebot</v-label>
   <v-row v-if="offerRequested">
-    <v-col cols="12" sm="4">
+    <v-col cols="12" sm="6">
+      <v-text-field v-model="email" :rules="emailRules" type="email" label="eMail" variant="outlined" />
+    </v-col>
+    <v-col cols="12" sm="6">
+      <v-select v-model="salutaion" label="Anrede" :items="salutationOptions" item-title="text" item-value="value" signle-line />
+    </v-col>
+  </v-row>
+  <v-row v-if="offerRequested">
+    <v-col cols="12" sm="6">
       <v-text-field v-model="firstName" :rules="nameRules" type="text" label="Vorname" variant="outlined" />
     </v-col>
-    <v-col cols="12" sm="4">
+    <v-col cols="12" sm="6">
       <v-text-field v-model="lastName" :rules="nameRules" type="text" label="Nachname" variant="outlined" />
-    </v-col>
-    <v-col cols="12" sm="4">
-      <v-text-field v-model="email" :rules="emailRules" type="email" label="eMail" variant="outlined" />
     </v-col>
   </v-row>
   <v-row v-if="offerRequested">
@@ -143,9 +148,10 @@ const timeTillROI = ref(0)
 const moduleLifetime = ref(null)
 const totalYield = ref(0)
 const offerRequested = ref(false)
+const email = ref(null)
+const salutaion = ref(null)
 const firstName = ref(null)
 const lastName = ref(null)
-const email = ref(null)
 
 const moduleOptions = [
   {text: 'Benutzerdefiniert', value: null},
@@ -173,6 +179,12 @@ const alignmentOptions = [
   { text: 'West-Nord-West', value: -115 },
   { text: 'Nord-West', value: -135 },
   { text: 'Nord-Nord-West', value: -160 },
+]
+
+const salutationOptions = [
+  { text: 'Frau', value: 'Frau' },
+  { text: 'Herr', value: 'Herr' },
+  { text: 'Andere', value: 'Andere' },
 ]
 
 const numberRules = [
