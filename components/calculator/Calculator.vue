@@ -8,22 +8,22 @@
   <v-label>Verfügbare Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="availableLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
+      <v-text-field v-model="availableLenght" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
         variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="availableWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
+      <v-text-field v-model="availableWidth" :rules="numberRules" @input="calculate" type="number" label="Breite (cm)"
         variant="outlined" />
     </v-col>
   </v-row>
   <v-label>Modul Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="moduleLenght" :rules="numberRules" @input="calculate" type="number" label="Länge"
+      <v-text-field v-model="moduleLenght" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
         variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="moduleWidth" :rules="numberRules" @input="calculate" type="number" label="Breite"
+      <v-text-field v-model="moduleWidth" :rules="numberRules" @input="calculate" type="number" label="Breite (cm)"
         variant="outlined"/>
     </v-col>
   </v-row>
