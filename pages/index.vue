@@ -47,7 +47,6 @@
     Eine Solaranlage für Ihr Zuhause ohne eigene Kosten und ohne Risiko. Profitieren auch Sie von günstigen
     Energiekosten durch unsere fachkundige Beratung und Unterstützung.
   </p>
- <v-img src="/page2/img/solar.png" class="header-img" />
 
   <v-img src="/page2/img/solar.png" class="header-img" />
   <v-divider />
