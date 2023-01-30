@@ -116,6 +116,11 @@ p {
   margin: 0 0 1em 0;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .v-divider {
   margin: 2em 0 5em 0;
 }
@@ -132,10 +137,5 @@ p {
 
 .v-btn {
   margin: 0 0 1em 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 </style>
