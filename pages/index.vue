@@ -3,7 +3,9 @@
   <v-img src="/page2/img/logo.png" center />
 
   <h1>Willkommen bei Industria Solares</h1>
+
   <h2>Solarenergie - der Weg in eine CO2-neutrale Zukunft</h2>
+  <v-img src="/page2/img/co2.png" class="header-img" />
 
   <p>
     Der Ausstoß von CO2 ist eines der größten Umweltprobleme, mit denen die Welt heute konfrontiert ist.
@@ -25,9 +27,9 @@
   </p>
 
   <v-divider />
-  <v-img src="/page2/img/co2.png" class="header-img" />
 
   <h2>Solaranlagen - Ihre persönliche Energieversorgung</h2>
+  <v-img src="/page2/img/solar.png" class="header-img" />
 
   <p>
     Sie interessieren sich für Solar, sind jedoch unschlüssig, welche Art der Finanzierung und welche Komponenten die
@@ -48,7 +50,6 @@
   </p>
 
   <v-divider />
-  <v-img src="/page2/img/solar.png" class="header-img" />
 
 
   <h2>Industria Solares - zusammen in die Zukunft</h2>
