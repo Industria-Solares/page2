@@ -5,7 +5,6 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer />
         <v-img src="/page2/img/logo.png" />
-        <v-spacer />
       </v-app-bar>
       <v-navigation-drawer color="primary" v-model="drawer">
         <v-list nav>
