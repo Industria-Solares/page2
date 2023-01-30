@@ -85,9 +85,7 @@
 
   <h2>Kalkulator</h2>
 
-  <p>
-  Hier Kommen Sie zu unserem Solar-Effizienzkalkulator.
-  </p>
+  <p> Hier Kommen Sie zu unserem Solar-Effizienzkalkulator.</p>
 
   <NuxtLink to="/calculator">
     <v-btn color="primary" dark>zum Kalkulator</v-btn>
