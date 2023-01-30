@@ -290,8 +290,62 @@ async function requestOffer() {
       console.log('error', error)
       return
     }
+    await sendOffer({
+      available_length: availableLength.value,
+      available_width: availableWidth.value,
+      module_length: moduleLength.value,
+      module_width: moduleWidth.value,
+      module_power: modulePower.value,
+      module_price: modulePrice.value,
+      module_lifetime: moduleLifetime.value,
+      module_alignment: moduleAlignment.value,
+      module_angle: moduleAngle.value,
+      current_price: currentPrice.value,
+      module_count: moduleCount.value,
+      module_efficiency: moduleEfficiency.value,
+      total_power: totalPower.value,
+      harvest_per_year: harvestPerYear.value,
+      yield_per_year: yieldPerYear.value,
+      total_cost: totalCost.value,
+      time_till_roi: timeTillROI.value,
+      total_yield: totalYield.value,
+      email: email.value,
+      salutation: salutation.value,
+      first_name: firstName.value,
+      last_name: lastName.value,
+    })
     await navigateTo('/')
   }
+}
+
+async function sendOffer(data: any) {
+  const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
+  // get the send-offer edge function
+  const { data: fnData, error } = await supabase
+    .rpc('send-offer', {
+      email: data.email,
+      salutation: data.salutation,
+      first_name: data.first_name,
+      last_name: data.last_name,
+      available_length: data.available_length,
+      available_width: data.available_width,
+      module_length: data.module_length,
+      module_width: data.module_width,
+      module_power: data.module_power,
+      module_price: data.module_price,
+      module_lifetime: data.module_lifetime,
+      module_alignment: data.module_alignment,
+      module_angle: data.module_angle,
+      current_price: data.current_price,
+      module_count: data.module_count,
+      module_efficiency: data.module_efficiency,
+      total_power: data.total_power,
+      harvest_per_year: data.harvest_per_year,
+      yield_per_year: data.yield_per_year,
+      total_cost: data.total_cost,
+      time_till_roi: data.time_till_roi,
+      total_yield: data.total_yield,
+    })
 }
 </script>
 
