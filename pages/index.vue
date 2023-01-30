@@ -24,7 +24,7 @@
     Es gibt auch die Möglichkeit der Nutzung von Solarthermie, welche dazu dient Wärmeenergie durch die Nutzung von
     Solarenergie zu erzeugen.
   </p>
-
+<br />
   <v-img src="/page2/img/co2.png" class="header-img" />
   <v-divider />
 
@@ -47,7 +47,7 @@
     Eine Solaranlage für Ihr Zuhause ohne eigene Kosten und ohne Risiko. Profitieren auch Sie von günstigen
     Energiekosten durch unsere fachkundige Beratung und Unterstützung.
   </p>
-
+<br />
   <v-img src="/page2/img/solar.png" class="header-img" />
   <v-divider />
 
