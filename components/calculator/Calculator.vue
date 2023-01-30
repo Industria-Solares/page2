@@ -1,10 +1,12 @@
 <template>
+  <v-label>Modul Optionen</v-label>
   <v-row>
     <v-col cols="12" sm="6">
       <v-select v-model="moduleSelected" @update:modelValue="selectModule" label="Modul" :items="moduleOptions"
         item-title="text" item-value="value" signle-line />
     </v-col>
   </v-row>
+  <v-divider />
   <v-label>Verfügbare Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
@@ -16,6 +18,7 @@
         variant="outlined" />
     </v-col>
   </v-row>
+  <v-divider />
   <v-label>Modul Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
@@ -27,6 +30,7 @@
         variant="outlined" />
     </v-col>
   </v-row>
+  <v-divider />
   <v-label>Modul Leistung</v-label>
   <v-row>
     <v-col cols="12" sm="6">
@@ -301,5 +305,9 @@ input[type='number'] {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.v-label {
+  margin: 0 0 0.50rem 0;
 }
 </style>
