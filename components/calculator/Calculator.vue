@@ -8,7 +8,7 @@
   <v-label>Verfügbare Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="availableLenght" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
+      <v-text-field v-model="availableLength" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
         variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
@@ -19,12 +19,12 @@
   <v-label>Modul Fläche</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-text-field v-model="moduleLenght" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
+      <v-text-field v-model="moduleLength" :rules="numberRules" @input="calculate" type="number" label="Länge (cm)"
         variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
       <v-text-field v-model="moduleWidth" :rules="numberRules" @input="calculate" type="number" label="Breite (cm)"
-        variant="outlined"/>
+        variant="outlined" />
     </v-col>
   </v-row>
   <v-label>Modul Leistung</v-label>
@@ -94,10 +94,11 @@
   <v-label>Angebot</v-label>
   <v-row v-if="offerRequested">
     <v-col cols="12" sm="6">
-      <v-text-field v-model="email" :rules="emailRules" type="email" label="eMail" variant="outlined" />
+      <v-text-field ref="emailRef" v-model="email" :rules="emailRules" type="email" label="eMail" variant="outlined" />
     </v-col>
     <v-col cols="12" sm="6">
-      <v-select v-model="salutaion" label="Anrede" :items="salutationOptions" item-title="text" item-value="value" signle-line />
+      <v-select v-model="salutation" label="Anrede" :items="salutationOptions" item-title="text" item-value="value"
+        signle-line />
     </v-col>
   </v-row>
   <v-row v-if="offerRequested">
@@ -109,7 +110,7 @@
     </v-col>
   </v-row>
   <v-row v-if="offerRequested">
-    <v-col cols="12" sm="4">    
+    <v-col cols="12" sm="4">
       <v-btn color="primary" @click="requestOffer">Anfordern</v-btn>
     </v-col>
   </v-row>
@@ -121,17 +122,15 @@
 </template>
 
 <script lang="ts" setup>
-import efficiencyMatrix from './efficiency'
-
 import { Ref } from 'vue'
 import { createClient } from '@supabase/supabase-js'
-const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
+import efficiencyMatrix from './efficiency'
 
 
 const moduleSelected: Ref<any> | Ref<null> = ref(null)
-const availableLenght = ref(null)
+const availableLength = ref(null)
 const availableWidth = ref(null)
-const moduleLenght = ref(null)
+const moduleLength = ref(null)
 const moduleWidth = ref(null)
 const modulePower = ref(null)
 const modulePrice = ref(null)
@@ -149,17 +148,17 @@ const moduleLifetime = ref(null)
 const totalYield = ref(0)
 const offerRequested = ref(false)
 const email = ref(null)
-const salutaion = ref(null)
+const salutation = ref(null)
 const firstName = ref(null)
 const lastName = ref(null)
 
 const moduleOptions = [
-  {text: 'Benutzerdefiniert', value: null},
-  {text: 'Luxor M120 / 365', value: {length: 175, width: 100, power: 365, price: 400.00, lifetime: 25}},
-  {text: 'Luxor M120 / 370', value: {length: 175, width: 100, power: 370, price: 425.00, lifetime: 25}},
-  {text: 'Luxor M120 / 375', value: {length: 175, width: 100, power: 375, price: 450.00, lifetime: 25}},
-  {text: 'Luxor M120 / 380', value: {length: 175, width: 100, power: 380, price: 475.00, lifetime: 25}},
-  {text: 'Luxor M120 / 385', value: {length: 175, width: 100, power: 385, price: 500.00, lifetime: 25}},
+  { text: 'Benutzerdefiniert', value: null },
+  { text: 'Luxor M120 / 365', value: { length: 175, width: 100, power: 365, price: 400.00, lifetime: 25 } },
+  { text: 'Luxor M120 / 370', value: { length: 175, width: 100, power: 370, price: 425.00, lifetime: 25 } },
+  { text: 'Luxor M120 / 375', value: { length: 175, width: 100, power: 375, price: 450.00, lifetime: 25 } },
+  { text: 'Luxor M120 / 380', value: { length: 175, width: 100, power: 380, price: 475.00, lifetime: 25 } },
+  { text: 'Luxor M120 / 385', value: { length: 175, width: 100, power: 385, price: 500.00, lifetime: 25 } },
 ]
 
 const alignmentOptions = [
@@ -209,14 +208,14 @@ const emailRules = [
 
 async function selectModule() {
   if (moduleSelected.value) {
-    moduleLenght.value = moduleSelected.value.length
+    moduleLength.value = moduleSelected.value.length
     moduleWidth.value = moduleSelected.value.width
     modulePower.value = moduleSelected.value.power
     modulePrice.value = moduleSelected.value.price
     moduleLifetime.value = moduleSelected.value.lifetime
     calculate()
   } else {
-    moduleLenght.value = null
+    moduleLength.value = null
     moduleWidth.value = null
     modulePower.value = null
     modulePrice.value = null
@@ -226,9 +225,9 @@ async function selectModule() {
 }
 
 async function calculate() {
-  const _availableLenght = availableLenght.value ? availableLenght.value : 0
+  const _availableLength = availableLength.value ? availableLength.value : 0
   const _availableWidth = availableWidth.value ? availableWidth.value : 0
-  const _moduleLenght = moduleLenght.value ? moduleLenght.value : 0
+  const _moduleLength = moduleLength.value ? moduleLength.value : 0
   const _moduleWidth = moduleWidth.value ? moduleWidth.value : 0
   const _modulePower = modulePower.value ? modulePower.value : 0
   const _modulePrice = modulePrice.value ? modulePrice.value : 0
@@ -237,14 +236,14 @@ async function calculate() {
   const _currentPrice = currentPrice.value ? currentPrice.value : 0
   const _moduleLifetime = moduleLifetime.value ? moduleLifetime.value : 0
 
-  const moduleCountHorizontal = Math.floor(_availableLenght / _moduleLenght) * Math.floor(_availableWidth / _moduleWidth)
-  const moduleCountVertical = Math.floor(_availableLenght / _moduleWidth) * Math.floor(_availableWidth / _moduleLenght)
+  const moduleCountHorizontal = Math.floor(_availableLength / _moduleLength) * Math.floor(_availableWidth / _moduleWidth)
+  const moduleCountVertical = Math.floor(_availableLength / _moduleWidth) * Math.floor(_availableWidth / _moduleLength)
   moduleCount.value = Math.max(moduleCountHorizontal, moduleCountVertical)
 
   const alignmentIndex = Math.floor(Math.abs(_moduleAlignment) / 5)
   const angleIndex = Math.floor(_moduleAngle / 5)
   moduleEfficiency.value = efficiencyMatrix[alignmentIndex][angleIndex]
-  
+
   totalPower.value = Math.floor(moduleCount.value * _modulePower * (moduleEfficiency.value / 100) * 100) / 100
   harvestPerYear.value = Math.floor(totalPower.value * 1650 / 1000 * 100) / 100
   yieldPerYear.value = Math.floor(harvestPerYear.value * _currentPrice * 100) / 100
@@ -256,18 +255,77 @@ async function calculate() {
 }
 
 async function requestOffer() {
-  const { error } = await supabase
-    .from('contacts')
-    .insert({
-      first_name: 'Test',
-      last_name: 'Test',
-      city: 'Test',
-      zipcode: 'Test',
-      street: 'Test',
-      street_no: 'Test',
-      email: 'Test',
-      phone: 'Test',
-    })
+  const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
+
+
+
+  if (email.value && salutation.value && firstName.value && lastName.value) {
+    // check if entry with given email exists
+    const { error: fetchError, data: fetchData } = await supabase
+      .from('contacts')
+      .select('id')
+      .eq('email', email.value)
+
+    if (fetchError) {
+      console.log('error', fetchError)
+      return
+    }
+
+    let id = null
+
+    if (fetchData.length > 0) {
+      id = fetchData[0].id
+    } else {
+
+      const { error: contactError, data } = await supabase
+        .from('contacts')
+        .insert({
+          email: email.value,
+          salutation: salutation.value,
+          first_name: firstName.value,
+          last_name: lastName.value,
+        })
+        .select('id')
+
+      if (contactError) {
+        console.log('error', contactError)
+        return
+      }
+
+      if (data.length > 0) {
+        id = data[0].id
+      }
+    }
+
+    const { error: calculationError } = await supabase
+      .from('calculations')
+      .insert({
+        contact: id,
+        available_length: availableLength.value,
+        available_width: availableWidth.value,
+        module_length: moduleLength.value,
+        module_width: moduleWidth.value,
+        module_power: modulePower.value,
+        module_price: modulePrice.value,
+        module_lifetime: moduleLifetime.value,
+        module_alignment: moduleAlignment.value,
+        module_angle: moduleAngle.value,
+        current_price: currentPrice.value,
+        module_count: moduleCount.value,
+        module_efficiency: moduleEfficiency.value,
+        total_power: totalPower.value,
+        harvest_per_year: harvestPerYear.value,
+        yield_per_year: yieldPerYear.value,
+        total_cost: totalCost.value,
+        time_till_roi: timeTillROI.value,
+        total_yield: totalYield.value,
+      })
+    if (calculationError) {
+      console.log('error', calculationError)
+      return
+    }
+    await navigateTo('/')
+  }
 }
 </script>
 
