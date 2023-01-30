@@ -26,6 +26,7 @@
   </p>
 
   <v-img src="/page2/img/co2.png" class="header-img" />
+  
   <v-divider />
 
   <h2>Solaranlagen - Ihre persönliche Energieversorgung</h2>
@@ -49,7 +50,8 @@
   </p>
 
   <v-img src="/page2/img/solar.png" class="header-img" />
-  <v-divider />
+ 
+ <v-divider />
 
   <h2>Industria Solares - zusammen in die Zukunft</h2>
 
