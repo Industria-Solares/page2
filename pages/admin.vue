@@ -2,7 +2,7 @@
   <v-expansion-panels>
     <v-expansion-panel v-for="calculation in calculations" :key="calculation.id">
       <v-expansion-panel-title>
-        <v-icon icon="mdi-account" /> {{ calculation.first_name }} {{ calculation.last_name }}
+        <v-icon icon="mdi-account" /> {{ calculation.first_name }} {{ calculation.last_name }} <v-spacer /> {{ formatDateTime(calculation.created_at) }}
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-icon icon="mdi-email" /> {{ calculation.email }}
@@ -95,4 +95,8 @@ const { data: calculations, error } = await supabase
   .from('calculations')
   .select('*')
 
+function formatDateTime(data: string) {
+  const date = new Date(data)
+  return date.toLocaleString()
+}
 </script>
