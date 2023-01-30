@@ -28,8 +28,7 @@
   <v-divider />
 
   <h2>Solaranlagen - Ihre persönliche Energieversorgung</h2>
-  <v-img src="/page2/img/solar.png" class="header-img" />
-
+ 
   <p>
     Sie interessieren sich für Solar, sind jedoch unschlüssig, welche Art der Finanzierung und welche Komponenten die
     richtigen für Sie sind?
@@ -47,6 +46,7 @@
     Eine Solaranlage für Ihr Zuhause ohne eigene Kosten und ohne Risiko. Profitieren auch Sie von günstigen
     Energiekosten durch unsere fachkundige Beratung und Unterstützung.
   </p>
+ <v-img src="/page2/img/solar.png" class="header-img" />
 
   <v-divider />
 
