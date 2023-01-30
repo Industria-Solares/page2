@@ -2,10 +2,10 @@
   <v-expansion-panels>
     <v-expansion-panel v-for="calculation in calculations" :key="calculation.id">
       <v-expansion-panel-title>
-        <v-icon icon="mdi-email" /> {{ calculation.email }}
+        <v-icon icon="mdi-account" /> {{ calculation.first_name }} {{ calculation.last_name }}
       </v-expansion-panel-title>
       <v-expansion-panel-text>
-        <v-icon icon="mdi-account" /> {{ calculation.first_name }} {{ calculation.last_name }}
+        <v-icon icon="mdi-email" /> {{ calculation.email }}
         <v-divider />
         <v-icon icon="mdi-calculator" /> {{ calculation }}
       </v-expansion-panel-text>
