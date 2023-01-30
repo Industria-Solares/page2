@@ -20,7 +20,7 @@ h1 {
   margin: 0 0 1em 0;
 }
 p {
-  text-align: justify;
+  text-align: left;
   margin: 0 0 2em 0;
 }
 </style>
