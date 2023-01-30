@@ -2,7 +2,7 @@
   <v-label>Modul Optionen</v-label>
   <v-row>
     <v-col cols="12" sm="6">
-      <v-select v-model="moduleSelected" @update:modelValue="selectModule" label="Modul" :items="moduleOptions"
+      <v-select v-model="moduleSelected" @update:modelValue="selectModule" label="Modul Optionen" :items="moduleOptions"
         item-title="text" item-value="value" signle-line />
     </v-col>
   </v-row>
