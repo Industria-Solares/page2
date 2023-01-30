@@ -100,3 +100,8 @@ function formatDateTime(data: string) {
   return date.toLocaleString()
 }
 </script>
+
+
+<style scoped>
+
+</style>
