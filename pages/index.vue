@@ -5,7 +5,7 @@
   <h1>Willkommen bei Industria Solares</h1>
 
   <h2>Solarenergie - der Weg in eine CO2-neutrale Zukunft</h2>
- 
+
   <p>
     Der Ausstoß von CO2 ist eines der größten Umweltprobleme, mit denen die Welt heute konfrontiert ist.
     Eine wichtige Quelle für CO2-Emissionen ist die Erzeugung von Strom aus fossilen Brennstoffen wie Kohle, Öl und Gas.
@@ -24,11 +24,11 @@
     Es gibt auch die Möglichkeit der Nutzung von Solarthermie, welche dazu dient Wärmeenergie durch die Nutzung von
     Solarenergie zu erzeugen.
   </p>
-<v-img src="/page2/img/co2.png" class="header-img" />
+
+  <v-img src="/page2/img/co2.png" class="header-img" />
   <v-divider />
 
   <h2>Solaranlagen - Ihre persönliche Energieversorgung</h2>
-  <v-img src="/page2/img/solar.png" class="header-img" />
 
   <p>
     Sie interessieren sich für Solar, sind jedoch unschlüssig, welche Art der Finanzierung und welche Komponenten die
@@ -48,8 +48,8 @@
     Energiekosten durch unsere fachkundige Beratung und Unterstützung.
   </p>
 
+  <v-img src="/page2/img/solar.png" class="header-img" />
   <v-divider />
-
 
   <h2>Industria Solares - zusammen in die Zukunft</h2>
 
