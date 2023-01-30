@@ -321,8 +321,8 @@ async function requestOffer() {
 async function sendOffer(data: any) {
   const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
   // get the send-offer edge function
-  const { data: fnData, error } = await supabase
-    .rpc('send-offer', {
+  const { data: fnData, error } = await supabase.functions.invoke('send-offer', {
+    body: {
       email: data.email,
       salutation: data.salutation,
       first_name: data.first_name,
@@ -345,7 +345,13 @@ async function sendOffer(data: any) {
       total_cost: data.total_cost,
       time_till_roi: data.time_till_roi,
       total_yield: data.total_yield,
-    })
+    }
+  })
+  if (error) {
+    console.log('error', error)
+  } else {
+    console.log('data', fnData)
+  }
 }
 </script>
 
