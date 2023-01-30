@@ -90,6 +90,7 @@
     <v-btn color="primary" dark>zum Kalkulator</v-btn>
   </NuxtLink>
 
+  <v-divider />
 </template>
 
 
