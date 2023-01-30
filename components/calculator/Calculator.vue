@@ -257,50 +257,10 @@ async function calculate() {
 async function requestOffer() {
   const supabase = createClient('https://eefncycjrylkbalioskc.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlZm5jeWNqcnlsa2JhbGlvc2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzQ3NjkwNTIsImV4cCI6MTk5MDM0NTA1Mn0.KiWwytF2Z5ipkI-xPMV2D4iGte6xdJxyF8YSQqIVWGQ')
 
-
-
   if (email.value && salutation.value && firstName.value && lastName.value) {
-    // check if entry with given email exists
-    const { error: fetchError, data: fetchData } = await supabase
-      .from('contacts')
-      .select('id')
-      .eq('email', email.value)
-
-    if (fetchError) {
-      console.log('error', fetchError)
-      return
-    }
-
-    let id = null
-
-    if (fetchData.length > 0) {
-      id = fetchData[0].id
-    } else {
-
-      const { error: contactError, data } = await supabase
-        .from('contacts')
-        .insert({
-          email: email.value,
-          salutation: salutation.value,
-          first_name: firstName.value,
-          last_name: lastName.value,
-        })
-        .select('id')
-
-      if (contactError) {
-        console.log('error', contactError)
-        return
-      }
-
-      if (data.length > 0) {
-        id = data[0].id
-      }
-    }
-
-    const { error: calculationError } = await supabase
+    const { error } = await supabase
       .from('calculations')
       .insert({
-        contact: id,
         available_length: availableLength.value,
         available_width: availableWidth.value,
         module_length: moduleLength.value,
@@ -319,9 +279,13 @@ async function requestOffer() {
         total_cost: totalCost.value,
         time_till_roi: timeTillROI.value,
         total_yield: totalYield.value,
+        email: email.value,
+        salutation: salutation.value,
+        first_name: firstName.value,
+        last_name: lastName.value,
       })
-    if (calculationError) {
-      console.log('error', calculationError)
+    if (error) {
+      console.log('error', error)
       return
     }
     await navigateTo('/')
