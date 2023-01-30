@@ -30,17 +30,15 @@
         variant="outlined" />
     </v-col>
   </v-row>
-  <v-divider />
-  <v-label>Modul Leistung</v-label>
   <v-row>
-    <v-col cols="12" sm="6">
-      <v-text-field v-model="modulePower" :rules="numberRules" @input="calculate" type="number"
-        label="Leistung pro Modul (Watt)" variant="outlined" />
-    </v-col>
     <v-col cols="12" sm="6">
       <v-text-field v-model="moduleCount" type="number" label="Mögliche Modulanzahl" variant="outlined"
         :readonly="true">
       </v-text-field>
+    </v-col>
+    <v-col cols="12" sm="6">
+      <v-text-field v-model="modulePower" :rules="numberRules" @input="calculate" type="number"
+        label="Leistung pro Modul (Watt)" variant="outlined" />
     </v-col>
   </v-row>
   <v-row>
