@@ -1,0 +1,1 @@
+import{p as c,e as t,o,F as _,q as n,s as p,v as a}from"./entry.4a0afc74.js";const d={},s=e=>(n("data-v-82aaeec4"),e=e(),p(),e),l=s(()=>a("h1",null,"Leasing",-1)),r=s(()=>a("p",null," Leasing Text ",-1));function i(e,u){return o(),t(_,null,[l,r],64)}const g=c(d,[["render",i],["__scopeId","data-v-82aaeec4"]]);export{g as default};

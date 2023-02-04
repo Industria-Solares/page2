@@ -1,0 +1,1 @@
+import{p as s,e as c,o as _,F as a,q as d,s as n,v as t}from"./entry.4a0afc74.js";const p={},o=e=>(d("data-v-b87f8f76"),e=e(),n(),e),r=o(()=>t("h1",null,"Produkt",-1)),u=o(()=>t("p",null," Produkt Text ",-1));function f(e,l){return _(),c(a,null,[r,u],64)}const h=s(p,[["render",f],["__scopeId","data-v-b87f8f76"]]);export{h as default};

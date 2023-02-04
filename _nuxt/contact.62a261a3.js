@@ -1,0 +1,1 @@
+import{p as c,e as s,o as a,F as _,q as n,s as d,v as t}from"./entry.4a0afc74.js";const p={},o=e=>(n("data-v-3e56054d"),e=e(),d(),e),r=o(()=>t("h1",null,"Kontakt",-1)),l=o(()=>t("p",null," Kontakt Text ",-1));function u(e,i){return a(),s(_,null,[r,l],64)}const h=c(p,[["render",u],["__scopeId","data-v-3e56054d"]]);export{h as default};
