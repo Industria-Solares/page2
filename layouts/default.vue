@@ -12,7 +12,16 @@
             <NuxtLink to="/"><v-icon icon="mdi-home" /> Home</NuxtLink>
           </v-list-item>
           <v-list-item>
-            <NuxtLink to="/calculator"><v-icon icon="mdi-calculator" /> Calculator</NuxtLink>
+            <NuxtLink to="/calculator"><v-icon icon="mdi-calculator" /> Kalkulator</NuxtLink>
+          </v-list-item>
+          <v-list-item>
+            <NuxtLink to="/product"><v-icon icon="mdi-solar-power-variant" /> Produkt</NuxtLink>
+          </v-list-item>
+          <v-list-item>
+            <NuxtLink to="/leasing"><v-icon icon="mdi-bank" /> Leasing</NuxtLink>
+          </v-list-item>
+          <v-list-item>
+            <NuxtLink to="/contact"><v-icon icon="mdi-contacts" /> Kontakt</NuxtLink>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
